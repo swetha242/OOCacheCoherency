@@ -32,10 +32,10 @@ class Directory
         friend class CPU;
     public:
         static Directory *getInstance();
-    //utility-replace by execute fn and call avail
-        void choose_cpu(int base_addr,int size,int pid);
+        void notify(int pid,int addr,int new_val);
+        void choose_cpu(int pid);
         void update_map(int pid,int address, int new_val);
         void finished_update(int pid);
-        void finished_exec(int pid);
+        void finished_exec(int pid,int chosen_cpu);
 };
 #endif

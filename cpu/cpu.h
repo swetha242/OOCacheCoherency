@@ -11,6 +11,6 @@ class CPU
     Directory *dir;
     public:
     CPU();
-    void execute(int, std::string, Cache );
+    void execute(int, std::string, Cache,int );
 };
 #endif

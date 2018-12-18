@@ -34,6 +34,7 @@ CPUAvail::CPUAvail(int no_cpu)
 void CPUAvail::set_avail(int cpu)
 {
     this->cpu_meta[cpu].is_free= !this->cpu_meta[cpu].is_free;
+    //cout<<"Set free "<<this->cpu_meta[cpu].is_free<<endl;
 }
 int CPUAvail::choose_cpu()
 {

@@ -3,11 +3,11 @@ CFLAGS  = -g -Wall -std=c++11 -pthread
 
 default: all
 
-all:  cpu_alloc.o main_memory.o directory.o cpu_avail.o cpu.o cache.o main.o 
-	$(CC) $(CFLAGS) -o main cpu_alloc.o main_memory.o directory.o cpu_avail.o cpu.o cache.o main.o
+all:  proc_alloc.o main_memory.o directory.o cpu_avail.o cpu.o cache.o main.o 
+	$(CC) $(CFLAGS) -o main proc_alloc.o main_memory.o directory.o cpu_avail.o cpu.o cache.o main.o
 
-cpu_alloc.o: cpu_alloc/cpu_alloc.cpp cpu_alloc/cpu_alloc.h
-	$(CC) $(CFLAGS) -c cpu_alloc/cpu_alloc.cpp
+proc_alloc.o: proc_alloc/proc_alloc.cpp proc_alloc/proc_alloc.h
+	$(CC) $(CFLAGS) -c proc_alloc/proc_alloc.cpp
 
 main_memory.o:  main_memory/main_memory.cpp main_memory/main_memory.h
 	$(CC) $(CFLAGS) -c main_memory/main_memory.cpp

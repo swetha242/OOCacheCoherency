@@ -11,11 +11,11 @@ CPU::CPU()
 {
     
 }
-void CPU::execute(int pid, string op, Cache c)
+void CPU::execute(int pid, string op, Cache c,int chosen_cpu)
 {
     cout <<endl<< "Execution Begun ----------------"<<endl;
     dir=dir->getInstance();
-    // cout << "CPU selected: pid is" << pid<<endl;
+    cout << "Cache"<<chosen_cpu<<" before execution" <<endl;
     c.display();
     int *data = c.getData(pid);
     int result;
@@ -44,7 +44,7 @@ void CPU::execute(int pid, string op, Cache c)
     
     m1->writeBack(wb_addr, to_string(result), op);
     //cpu finished exec
-    dir->finished_exec(pid);
+    dir->finished_exec(pid,chosen_cpu);
     
     //DEBUG
     // cout << "Sum : "<<data[2]<<endl;

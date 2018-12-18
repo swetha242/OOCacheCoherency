@@ -41,7 +41,7 @@ bool MainMemory::push(int pid,vector<string> data,int wbIndex,string op,int allo
     int i = 0;
     // last_addr+=1;
     // base to pass to directory
-    int base_addr=last_addr+1000;
+    //int base_addr=last_addr+1000;
     for(i=0; i<alloc_size - 1; i++){
         this->memory[last_addr].address = last_addr+1000;
         this->memory[last_addr].pid = pid;
@@ -53,12 +53,7 @@ bool MainMemory::push(int pid,vector<string> data,int wbIndex,string op,int allo
         this->memory[last_addr].valid = true;
         last_addr ++;
     }
-    // this->memory[last_addr].address = last_addr+1000;
-    // this->memory[last_addr].pid = pid;
-    // this->memory[last_addr].data = data[i];
-    // this->memory[last_addr].type = "wb"; // Data rewrite
-    // this->memory[last_addr].valid = true; 
-    // last_addr ++;
+    
 
     this->memory[last_addr].address = last_addr+1000;
     this->memory[last_addr].pid = pid;
@@ -67,24 +62,13 @@ bool MainMemory::push(int pid,vector<string> data,int wbIndex,string op,int allo
     this->memory[last_addr].valid = true;
     last_addr ++;
 
-    // Kept a print for DEBUG -- Will remove completely when satisfied.
-    // cout<<"Addr"<<"\t"<<"id"<<"\t"<<"data"<<"\t"<<"type"<<endl;
-    // for(int i=0; i<this->size; i++){
-    //     if(this->memory[i].address == 0){
-    //         break;
-    //     }
-    //     cout<<this->memory[i].address<<"\t";
-    //     cout<<this->memory[i].pid<<"\t";
-    //     cout<<this->memory[i].data<<"\t";
-    //     cout<<this->memory[i].type<<"\t";
-    //     cout<<endl;
-    // }
     this->size_left -= alloc_size;
     cout<<"Size left = "<<size_left<<endl;
     mainMem.unlock();
-    dir->choose_cpu(base_addr,alloc_size,pid);
-    // ---------- TODO ----------
+
     // invoke the directory from here 
+    dir->choose_cpu(pid);
+    
     return true;
 }
 void MainMemory::change_op(int pid, string op){
@@ -92,7 +76,7 @@ void MainMemory::change_op(int pid, string op){
     //find start address and size
     if(index!=-1)
     { 
-        int base_addr=index;
+       
         int size=1;
         while(this->memory[index].type != "i"){
             index++;
@@ -101,7 +85,7 @@ void MainMemory::change_op(int pid, string op){
         mainMem.lock();
         this->memory[index].data = op;
         mainMem.unlock();
-        dir->choose_cpu(base_addr,size,pid);
+        dir->choose_cpu(pid);
     }
 
 }
